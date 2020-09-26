@@ -1,0 +1,132 @@
+﻿@model IEnumerable<_91App_Test.tOrderList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Order List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.forderListId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fOrderStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="setData">
+        @foreach (var item in Model)
+        {
+            <tr class="orderData">
+                <td>
+                    <input type="checkbox" id="@item.forderListId" name="checkItem[]" value="@item.forderListId" />
+                </td>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.forderListId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fId)
+                </td>
+                <td>
+                    @Html.ActionLink(item.fItem,"detail","Order",new { Id = item.forderListId},new { })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fCost)
+                </td>
+                <td>
+                    @{ 
+                        int x = (int)item.fOrderStatus;
+                        switch (x)
+                        {
+                            case 1:
+                                @:Payment completed
+                                break;
+                            case 2:
+                                @:To be shipped
+                                break;
+                            default:
+                                @:something wrong
+                                break;
+                        }
+
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<input id="confirm" value="Confirm" type="button" />
+<script>
+    let chkVal = new Array();
+    let setData = $("#setData");
+    $("#confirm").click(() => {
+        chkVal = $("input[name='checkItem[]']:checked").map(function () { return $(this).val(); }).get();
+        console.log(chkVal);
+        $.ajax({
+            url: "/Order/changeStatus",
+            type: "POST",
+            data: { chkVal: chkVal },
+            success: (data) => {
+                $(".orderData").remove();
+                console.log(data);
+                console.log("success");
+                $.each(data, function (index, value) {
+                    if (value.fOrderStatus == 1) {
+                        value.fOrderStatus = "Payment completed";
+                    } else {
+                        value.fOrderStatus = "To be shipped";
+                    }
+                    var Data =
+                        `
+                <tr class = "orderData">
+                    <td>
+                        <input type="checkbox" id="${value.forderListId}" name="checkItem[]" value="${value.forderListId}" />
+                    </td>
+                    <td class="hidden">
+                        ${value.forderListId}
+                    </td>
+                    <td>
+                        ${value.fId}
+                    </td>
+                    <td>
+<a href="https://localhost:44373/Order/detail/${value.forderListId}">${value.fItem}</a>
+                    </td>
+                    <td>
+                        ${value.fPrice}
+                    </td>
+                    <td>
+                        ${value.fCost}
+                    </td>
+                    <td>
+                        ${value.fOrderStatus}
+                    </td>
+                </tr>
+                `;
+                    setData.append(Data);
+                    console.log(Data);
+                });
+            }
+        })
+    });
+
+</script>
