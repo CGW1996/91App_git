@@ -11,20 +11,24 @@ namespace _91App_Test
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class tOrderList
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tOrderList()
+        {
+            this.tShippingOrder = new HashSet<tShippingOrder>();
+        }
+    
         public int forderListId { get; set; }
-        [DisplayName("Order Id")]
         public string fId { get; set; }
-        [DisplayName("Order Item")]
         public string fItem { get; set; }
-        [DisplayName("Price")]
         public Nullable<int> fPrice { get; set; }
-        [DisplayName("Cost")]
         public Nullable<int> fCost { get; set; }
-        [DisplayName("Status")]
         public Nullable<int> fOrderStatus { get; set; }
+        public string fUser { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tShippingOrder> tShippingOrder { get; set; }
     }
 }

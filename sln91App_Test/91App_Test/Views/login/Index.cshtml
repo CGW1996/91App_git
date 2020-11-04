@@ -1,0 +1,49 @@
+﻿@model _91App_Test.tMember
+
+@{
+    ViewBag.Title = "Index";
+    string s1 = ViewBag.code.Substring(0, 1) + ".png";
+    string s2 = ViewBag.code.Substring(1, 1) + ".png";
+    string s3 = ViewBag.code.Substring(2, 1) + ".png";
+    string s4 = ViewBag.code.Substring(3, 1) + ".png";
+}
+<style>
+    img {
+        height: 64px;
+    }
+</style>
+@*<script src="https://www.google.com/recaptcha/api.js"></script>*@
+<h2>Login</h2>
+<form method="post">
+    <label id="click">Account: </label>
+    <input type="text" name="txtAccount" id="account" />
+    <br />
+    <label>Password: </label>
+    <input type="text" name="txtPassword" id="password" />
+    <br />
+    <label>Authority: </label>
+    <input type="text" name="txtAuthority" />
+    <img src="~/Content/login/@s1" />
+    <img src="~/Content/login/@s2" />
+    <img src="~/Content/login/@s3" />
+    <img src="~/Content/login/@s4" />
+    <br />
+    @*<button class="g-recaptcha"
+            data-sitekey="6LdrYtYZAAAAADoFcCKFwiW5Kz-N5HXoOhdZAoNX"
+            data-callback='onSubmit'
+            data-action='submit'>
+        Submit
+    </button>*@
+    <div style="color:red;">@ViewBag.message</div>
+    <input type="submit" value="sign in" />
+</form>
+<script>
+    $("#click").click(() => {
+        $("#account").val("UserA");
+    })
+</script>
+@*<script>
+    function onSubmit(token) {
+        document.getElementById("demo-form").submit();
+    }
+</script>*@

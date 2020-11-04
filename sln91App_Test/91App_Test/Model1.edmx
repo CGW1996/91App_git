@@ -4,55 +4,205 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbOrderListModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbOrderListModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tMember">
+          <Key>
+            <PropertyRef Name="fMemberId" />
+          </Key>
+          <Property Name="fMemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fUserName" Type="varchar" MaxLength="50" />
+          <Property Name="fPassword" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tOrderList">
           <Key>
-            <PropertyRef Name="forderListId" />
+            <PropertyRef Name="fId" />
           </Key>
           <Property Name="forderListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="fItem" Type="nvarchar" MaxLength="50" />
           <Property Name="fPrice" Type="int" />
           <Property Name="fCost" Type="int" />
           <Property Name="fOrderStatus" Type="int" />
+          <Property Name="fUser" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="fProductId" />
+          </Key>
+          <Property Name="fProductId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fProductName" Type="nvarchar" MaxLength="200" />
+          <Property Name="fProductPrice" Type="int" />
+          <Property Name="fProductBrand" Type="nvarchar" MaxLength="200" />
+          <Property Name="fPayByCard" Type="tinyint" />
+          <Property Name="fPayByArrive" Type="tinyint" />
+          <Property Name="fPayByLinePay" Type="tinyint" />
+          <Property Name="fPayByJKO" Type="tinyint" />
+          <Property Name="fInstallment" Type="tinyint" />
+          <Property Name="fInstallmentRate" Type="tinyint" />
+          <Property Name="fDelivery" Type="tinyint" />
+          <Property Name="fStock" Type="smallint" />
+          <Property Name="fProductImage" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tShippingOrder">
+          <Key>
+            <PropertyRef Name="fShippingOrderId" />
+          </Key>
+          <Property Name="fShippingOrderId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="fCreatedDateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__tShippingOr__fId__29572725">
+          <End Role="tOrderList" Type="Self.tOrderList" Multiplicity="0..1" />
+          <End Role="tShippingOrder" Type="Self.tShippingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrderList">
+              <PropertyRef Name="fId" />
+            </Principal>
+            <Dependent Role="tShippingOrder">
+              <PropertyRef Name="fId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dbOrderListModelStoreContainer">
+          <EntitySet Name="tMember" EntityType="Self.tMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrderList" EntityType="Self.tOrderList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProduct" EntityType="Self.tProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tShippingOrder" EntityType="Self.tShippingOrder" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tShippingOr__fId__29572725" Association="Self.FK__tShippingOr__fId__29572725">
+            <End Role="tOrderList" EntitySet="tOrderList" />
+            <End Role="tShippingOrder" EntitySet="tShippingOrder" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbOrderListModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbOrderListEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tMember" EntityType="dbOrderListModel.tMember" />
+          <EntitySet Name="tOrderList" EntityType="dbOrderListModel.tOrderList" />
+          <EntitySet Name="tProduct" EntityType="dbOrderListModel.tProduct" />
+          <EntitySet Name="tShippingOrder" EntityType="dbOrderListModel.tShippingOrder" />
+          <AssociationSet Name="FK__tShippingOr__fId__29572725" Association="dbOrderListModel.FK__tShippingOr__fId__29572725">
+            <End Role="tOrderList" EntitySet="tOrderList" />
+            <End Role="tShippingOrder" EntitySet="tShippingOrder" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tMember">
+          <Key>
+            <PropertyRef Name="fMemberId" />
+          </Key>
+          <Property Name="fMemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="tOrderList">
           <Key>
-            <PropertyRef Name="forderListId" />
+            <PropertyRef Name="fId" />
           </Key>
           <Property Name="forderListId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fItem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fPrice" Type="Int32" />
           <Property Name="fCost" Type="Int32" />
           <Property Name="fOrderStatus" Type="Int32" />
+          <Property Name="fUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tShippingOrder" Relationship="dbOrderListModel.FK__tShippingOr__fId__29572725" FromRole="tOrderList" ToRole="tShippingOrder" />
         </EntityType>
-        <EntityContainer Name="dbOrderListEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tOrderList" EntityType="Self.tOrderList" />
-        </EntityContainer>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="fProductId" />
+          </Key>
+          <Property Name="fProductId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fProductPrice" Type="Int32" />
+          <Property Name="fProductBrand" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fPayByCard" Type="Byte" />
+          <Property Name="fPayByArrive" Type="Byte" />
+          <Property Name="fPayByLinePay" Type="Byte" />
+          <Property Name="fPayByJKO" Type="Byte" />
+          <Property Name="fInstallment" Type="Byte" />
+          <Property Name="fInstallmentRate" Type="Byte" />
+          <Property Name="fDelivery" Type="Byte" />
+          <Property Name="fStock" Type="Int16" />
+          <Property Name="fProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tShippingOrder">
+          <Key>
+            <PropertyRef Name="fShippingOrderId" />
+          </Key>
+          <Property Name="fShippingOrderId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fCreatedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tOrderList" Relationship="dbOrderListModel.FK__tShippingOr__fId__29572725" FromRole="tShippingOrder" ToRole="tOrderList" />
+        </EntityType>
+        <Association Name="FK__tShippingOr__fId__29572725">
+          <End Type="dbOrderListModel.tOrderList" Role="tOrderList" Multiplicity="0..1" />
+          <End Type="dbOrderListModel.tShippingOrder" Role="tShippingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrderList">
+              <PropertyRef Name="fId" />
+            </Principal>
+            <Dependent Role="tShippingOrder">
+              <PropertyRef Name="fId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbOrderListModelStoreContainer" CdmEntityContainer="dbOrderListEntities">
+          <EntitySetMapping Name="tMember">
+            <EntityTypeMapping TypeName="dbOrderListModel.tMember">
+              <MappingFragment StoreEntitySet="tMember">
+                <ScalarProperty Name="fPassword" ColumnName="fPassword" />
+                <ScalarProperty Name="fUserName" ColumnName="fUserName" />
+                <ScalarProperty Name="fMemberId" ColumnName="fMemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tOrderList">
             <EntityTypeMapping TypeName="dbOrderListModel.tOrderList">
               <MappingFragment StoreEntitySet="tOrderList">
-                <ScalarProperty Name="forderListId" ColumnName="forderListId" />
-                <ScalarProperty Name="fId" ColumnName="fId" />
-                <ScalarProperty Name="fItem" ColumnName="fItem" />
-                <ScalarProperty Name="fPrice" ColumnName="fPrice" />
-                <ScalarProperty Name="fCost" ColumnName="fCost" />
+                <ScalarProperty Name="fUser" ColumnName="fUser" />
                 <ScalarProperty Name="fOrderStatus" ColumnName="fOrderStatus" />
+                <ScalarProperty Name="fCost" ColumnName="fCost" />
+                <ScalarProperty Name="fPrice" ColumnName="fPrice" />
+                <ScalarProperty Name="fItem" ColumnName="fItem" />
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="forderListId" ColumnName="forderListId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProduct">
+            <EntityTypeMapping TypeName="dbOrderListModel.tProduct">
+              <MappingFragment StoreEntitySet="tProduct">
+                <ScalarProperty Name="fProductImage" ColumnName="fProductImage" />
+                <ScalarProperty Name="fStock" ColumnName="fStock" />
+                <ScalarProperty Name="fDelivery" ColumnName="fDelivery" />
+                <ScalarProperty Name="fInstallmentRate" ColumnName="fInstallmentRate" />
+                <ScalarProperty Name="fInstallment" ColumnName="fInstallment" />
+                <ScalarProperty Name="fPayByJKO" ColumnName="fPayByJKO" />
+                <ScalarProperty Name="fPayByLinePay" ColumnName="fPayByLinePay" />
+                <ScalarProperty Name="fPayByArrive" ColumnName="fPayByArrive" />
+                <ScalarProperty Name="fPayByCard" ColumnName="fPayByCard" />
+                <ScalarProperty Name="fProductBrand" ColumnName="fProductBrand" />
+                <ScalarProperty Name="fProductPrice" ColumnName="fProductPrice" />
+                <ScalarProperty Name="fProductName" ColumnName="fProductName" />
+                <ScalarProperty Name="fProductId" ColumnName="fProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tShippingOrder">
+            <EntityTypeMapping TypeName="dbOrderListModel.tShippingOrder">
+              <MappingFragment StoreEntitySet="tShippingOrder">
+                <ScalarProperty Name="fCreatedDateTime" ColumnName="fCreatedDateTime" />
+                <ScalarProperty Name="fStatus" ColumnName="fStatus" />
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="fShippingOrderId" ColumnName="fShippingOrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

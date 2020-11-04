@@ -5,7 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6b28f8418e9949dcacc932f1f62cc3e9" Name="Diagram1">
-        <EntityTypeShape EntityType="dbOrderListModel.tOrderList" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbOrderListModel.tMember" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="dbOrderListModel.tOrderList" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="dbOrderListModel.tProduct" Width="1.5" PointX="0.875" PointY="3.75" />
+        <EntityTypeShape EntityType="dbOrderListModel.tShippingOrder" Width="1.5" PointX="3" PointY="1.25" />
+        <AssociationConnector Association="dbOrderListModel.FK__tShippingOr__fId__29572725" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

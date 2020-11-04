@@ -25,6 +25,9 @@ namespace _91App_Test
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tMember> tMember { get; set; }
         public virtual DbSet<tOrderList> tOrderList { get; set; }
+        public virtual DbSet<tProduct> tProduct { get; set; }
+        public virtual DbSet<tShippingOrder> tShippingOrder { get; set; }
     }
 }

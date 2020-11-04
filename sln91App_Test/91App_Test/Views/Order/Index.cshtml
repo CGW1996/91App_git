@@ -2,10 +2,12 @@
 
 @{
     ViewBag.Title = "Index";
+    string b = "";
 }
 
 <h2>Order List</h2>
-
+@Html.ActionLink("shipping Order","shipping","Order")
+@Html.ActionLink("toZero", "toZero","Order")
 <table class="table">
     <thead>
         <tr>
@@ -34,9 +36,17 @@
     <tbody id="setData">
         @foreach (var item in Model)
         {
+            if(item.fOrderStatus == 2)
+            {
+                b = "noClick";
+            }
+            else
+            {
+                b = "canClick";
+            }
             <tr class="orderData">
                 <td>
-                    <input type="checkbox" id="@item.forderListId" name="checkItem[]" value="@item.forderListId" />
+                    <input type="checkbox" class="@b" id="@item.forderListId" name="checkItem[]" value="@item.forderListId" />
                 </td>
                 <td class="hidden">
                     @Html.DisplayFor(modelItem => item.forderListId)
@@ -77,6 +87,9 @@
 </table>
 <input id="confirm" value="Confirm" type="button" />
 <script>
+    $(() => {
+        $(".noClick").prop("disabled", true);
+    });
     let chkVal = new Array();
     let setData = $("#setData");
     $("#confirm").click(() => {
@@ -123,6 +136,9 @@
                 </tr>
                 `;
                     setData.append(Data);
+                    if (value.fOrderStatus == "To be shipped") {
+                        $("#" + value.forderListId).prop("disabled", true);
+                    }
                     console.log(Data);
                 });
             }

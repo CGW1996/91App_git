@@ -1,0 +1,42 @@
+﻿@model IEnumerable<_91App_Test.tShippingOrder>
+
+@{
+    ViewBag.Title = "shipping";
+}
+
+<h2>shipping</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fShippingOrderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCreatedDateTime)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fShippingOrderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fCreatedDateTime)
+        </td>
+    </tr>
+}
+
+</table>

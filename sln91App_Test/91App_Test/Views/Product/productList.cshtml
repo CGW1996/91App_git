@@ -1,0 +1,105 @@
+﻿@model IEnumerable<_91App_Test.tProduct>
+
+@{
+    ViewBag.Title = "productList";
+}
+
+<h2>商品清單</h2>
+
+<p>
+    @Html.ActionLink("新增商品", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            商品編號
+        </th>
+        <th>
+            商品名稱
+        </th>
+        <th>
+            價格
+        </th>
+        <th>
+            品牌
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.fPayByCard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fPayByArrive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fPayByLinePay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fPayByJKO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fInstallment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fInstallmentRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDelivery)
+        </th>*@
+        <th>
+            庫存
+        </th>
+        <th>
+            封面照片
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductBrand)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.fPayByCard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fPayByArrive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fPayByLinePay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fPayByJKO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fInstallment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fInstallmentRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fDelivery)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.fStock)
+        </td>
+        <td>
+            <img style="height:50px;" src="..@item.fProductImage" />
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.fProductId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.fProductId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.fProductId })
+        </td>
+    </tr>
+}
+
+</table>

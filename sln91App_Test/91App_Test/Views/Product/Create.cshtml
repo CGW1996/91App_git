@@ -1,0 +1,99 @@
+﻿@model _91App_Test.tProduct
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>新增商品</h2>
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="control-label col-md-2">商品名稱</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="fProductName" name="fProductName" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">商品價格</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="fProductPrice" name="fProductPrice" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">品牌</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="fProductBrand" name="fProductBrand" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">付款方式</div>
+            <div class="col-md-6">
+                <input type="checkbox" id="fPayByArrive" name="fPayBy" value="1" />
+                <label for="fPayByArrive">貨到付款</label>
+                <input type="checkbox" id="fPayByLinePay" name="fPayBy" value="2" />
+                <label for="fPayByLinePay">LinePay</label>
+                <input type="checkbox" id="fPayByJKO" name="fPayBy" value="3" />
+                <label for="fPayByJKO">街口支付</label>
+                <input type="checkbox" id="fPayByCard" name="fPayByCard" value="4" />
+                <label for="fPayByCard">信用卡</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">分期期數</div>
+            <div class="col-md-3">
+                <select class="form-control" id="fInstallment" name="fInstallment">
+                    <option value="3">3</option>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">分期利率</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="fInstallmentRate" name="fInstallmentRate" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">配送方式</div>
+            <div class="col-md-3">
+                <input type="checkbox" id="toHome" name="fDeliveryTo" value="1" />
+                <label for="toHome">宅配</label>
+                <input type="checkbox" id="toconvenientStore" name="fDeliveryTo" value="2" />
+                <label for="toconvenientStore">超商取貨</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">庫存</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="fStock" name="fStock" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">圖片</div>
+            <div class="col-md-3">
+                <input type="file" id="fImage" name="fImage" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+    <div>
+        @Html.ActionLink("Back to List", "productList", "Product")
+    </div>

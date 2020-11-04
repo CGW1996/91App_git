@@ -100,6 +100,23 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login\0.png" />
+    <Content Include="Content\login\1.png" />
+    <Content Include="Content\login\2.png" />
+    <Content Include="Content\login\3.png" />
+    <Content Include="Content\login\4.png" />
+    <Content Include="Content\login\5.png" />
+    <Content Include="Content\login\6.png" />
+    <Content Include="Content\login\7.png" />
+    <Content Include="Content\login\8.png" />
+    <Content Include="Content\login\9.png" />
+    <Content Include="Content\product\BBBLkUO.jfif" />
+    <Content Include="Content\product\china.jfif" />
+    <Content Include="Content\product\Hinterzarten.jpg" />
+    <Content Include="Content\product\iceland.jfif" />
+    <Content Include="Content\product\paris.jfif" />
+    <Content Include="Content\product\south africa.jfif" />
+    <Content Include="Content\product\spain.jfif" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -139,7 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,8 +177,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CDitionay.cs" />
+    <Compile Include="Models\CLogin.cs" />
+    <Compile Include="Models\payMethod.cs" />
+    <Compile Include="Models\serialNum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tMember.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tOrderList.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tProduct.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tShippingOrder.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -178,6 +210,11 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\login\Index.cshtml" />
+    <Content Include="Views\Order\shipping.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\productList.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -187,7 +224,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
